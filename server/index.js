@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const routes = require('./routes/api');
-require('dotenv').config();
+require('dotenv').config({path:'../.env'});
 
 const app = express();
 
@@ -23,7 +23,8 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(bodyParser.json());
+app.use(express.json());
+app.use(express.urlencoded({extended:true}))
 
 app.use('/api', routes);
 
