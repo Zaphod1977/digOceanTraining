@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import Input from './Input';
 import ListTodo from './ListTodo';
+import Note from './Note';
 
 class Todo extends Component {
   state = {
@@ -16,9 +17,9 @@ class Todo extends Component {
     axios
       .get('http://localhost:5000/api/todos')
       .then((res) => {
-        if (res.data) {
+        if (res.data && res.data.todos) {
           this.setState({
-            todos: res.data,
+            todos: res.data.todos,
           });
         }
       })
@@ -36,6 +37,24 @@ class Todo extends Component {
       .catch((err) => console.log(err));
   };
 
+  handleNoteSave = ({ noteText, imageUrls }) => {
+    // Save the noteText and imageUrls
+    // You may want to send this data to a server or store it in a state management solution
+    console.log('Note text:', noteText);
+    console.log('Image URLs:', imageUrls);
+
+    // Example: Save to server (adjust as needed)
+    axios
+      .post('http://localhost:5000/api/saveNote', { noteText, imageUrls })
+      .then(() => {
+        console.log('Note saved successfully');
+        this.getTodos();
+      })
+      .catch((error) => {
+        console.error('Error saving note:', error);
+      });
+  };
+
   render() {
     let { todos } = this.state;
 
@@ -44,6 +63,7 @@ class Todo extends Component {
         <h1>My Todo(s)</h1>
         <Input getTodos={this.getTodos} />
         <ListTodo todos={todos} deleteTodo={this.deleteTodo} />
+        <Note onNoteSave={this.handleNoteSave} />
       </div>
     );
   }

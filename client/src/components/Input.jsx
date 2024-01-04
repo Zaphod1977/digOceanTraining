@@ -6,40 +6,43 @@ class Input extends Component {
     action: '',
   };
 
-  addTodo = () => {
-    const task = { action: this.state.action };
+  handleInputChange = (e) => {
+    this.setState({ action: e.target.value });
+  };
 
-    if (task.action && task.action.length > 0) {
+  addTodo = () => {
+    const task = { text: this.state.action };
+
+    if (task.text && task.text.length > 0) {
       axios
-        .post('http://localhost:5000/api/todos', task)
+        .post('http://localhost:5000/api/saveNote', task)
         .then((res) => {
           if (res.data) {
             this.props.getTodos();
-            this.setState({ action: '' });
-            console.log("way to go")
+            this.setState({ action: '' }); // Clear the input field
+            console.log('way to go');
           }
         })
         .catch((err) => console.log(err));
     } else {
-      console.log('input field required');
+      console.log('text field required');
     }
   };
 
-  handleChange = (e) => {
-    this.setState({
-      action: e.target.value,
-    });
-  };
-
   render() {
-    let { action } = this.state;
     return (
       <div>
-        <input type="text" onChange={this.handleChange} value={action} />
-        <button onClick={this.addTodo}>add todo</button>
+        <input
+          type="text"
+          value={this.state.action}
+          onChange={this.handleInputChange}
+          placeholder="Add a new todo..."
+        />
+        <button onClick={this.addTodo}>Add Todo</button>
       </div>
     );
   }
 }
 
 export default Input;
+
