@@ -11,11 +11,21 @@ class Input extends Component {
   };
 
   addTodo = () => {
-    const todo = { text: this.state.action };
+    const todo = {
+      text: this.state.action,
+      timestamp: new Date().toLocaleString('en-US', {
+        month: 'numeric',
+        day: 'numeric',
+        year: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+        hour12: true,
+      }),
+    };
 
     if (todo.text && todo.text.length > 0) {
       axios
-        .post('http://localhost:5000/api/saveNote', todo)
+        .post('http://localhost:5000/api/todo', todo)  // Update the API endpoint
         .then((res) => {
           if (res.data) {
             this.props.getTodos();
@@ -36,13 +46,12 @@ class Input extends Component {
           type="text"
           value={this.state.action}
           onChange={this.handleInputChange}
-          placeholder="Add a new todo..."
+          placeholder="Add a new message..."
         />
-        <button onClick={this.addTodo}>Add Todo</button>
+        <button onClick={this.addTodo}>Add</button>
       </div>
     );
   }
 }
 
 export default Input;
-

@@ -24,10 +24,10 @@ const Note = ({ onNoteSave }) => {
 
   return (
     <div>
-      <textarea value={noteText} onChange={(e) => setNoteText(e.target.value)} />
-      <button onClick={handleSave}>Save Note</button>
+      {/* <textarea value={noteText} onChange={(e) => setNoteText(e.target.value)} />
+      <button onClick={handleSave}>Save Note</button> */}
       <ImageUploader onUpload={handleImageUpload} />
-      <button onClick={handleNoteSave}>Save Note</button>
+      {/* <button onClick={handleNoteSave}>Save Note</button> */}
     </div>
   );
 };

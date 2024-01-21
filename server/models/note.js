@@ -6,6 +6,10 @@ const noteSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Text is required for a note'],
   },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
   images: {
     type: [String], // Assuming imageUrls is an array of strings
   },
