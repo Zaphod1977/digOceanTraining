@@ -11,11 +11,11 @@ class Input extends Component {
   };
 
   addTodo = () => {
-    const task = { text: this.state.action };
+    const todo = { text: this.state.action };
 
-    if (task.text && task.text.length > 0) {
+    if (todo.text && todo.text.length > 0) {
       axios
-        .post('http://localhost:5000/api/saveNote', task)
+        .post('http://localhost:5000/api/saveNote', todo)
         .then((res) => {
           if (res.data) {
             this.props.getTodos();

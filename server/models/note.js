@@ -1,16 +1,18 @@
 const mongoose = require('mongoose');
 
+// Define the Note schema
 const noteSchema = new mongoose.Schema({
   text: {
     type: String,
-    required: true,
+    required: [true, 'Text is required for a note'],
   },
   images: {
-    type: [String], // Assuming image URLs are stored as strings
-    default: [],
+    type: [String], // Assuming imageUrls is an array of strings
   },
+  // You can add more fields as needed
 });
 
+// Create the Note model
 const Note = mongoose.model('Note', noteSchema);
 
 module.exports = Note;

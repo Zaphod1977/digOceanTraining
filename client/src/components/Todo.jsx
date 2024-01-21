@@ -21,11 +21,12 @@ class Todo extends Component {
           this.setState({
             todos: res.data.todos,
           });
+          console.log('Updated Todos:', res.data.todos);
         }
       })
       .catch((err) => console.log(err));
   };
-
+  
   deleteTodo = (id) => {
     axios
       .delete(`http://localhost:5000/api/todos/${id}`)
@@ -45,9 +46,9 @@ class Todo extends Component {
 
     // Example: Save to server (adjust as needed)
     axios
-      .post('http://localhost:5000/api/saveNote', { noteText, imageUrls })
-      .then(() => {
-        console.log('Note saved successfully');
+      .post('http://localhost:5000/api/todos', { text: noteText, imageUrls })
+      .then((response) => {
+        console.log('Server Response:', response.data);
         this.getTodos();
       })
       .catch((error) => {
@@ -55,18 +56,20 @@ class Todo extends Component {
       });
   };
 
-  render() {
-    let { todos } = this.state;
+// Todo.jsx
+render() {
+  let { todos } = this.state;
 
-    return (
-      <div>
-        <h1>My Todo(s)</h1>
-        <Input getTodos={this.getTodos} />
-        <ListTodo todos={todos} deleteTodo={this.deleteTodo} />
-        <Note onNoteSave={this.handleNoteSave} />
-      </div>
-    );
-  }
+  return (
+    <div>
+      <h1>My Todo(s)</h1>
+      <Input getTodos={this.getTodos} />
+      <ListTodo todos={todos} deleteTodo={this.deleteTodo} />
+      <Note onNoteSave={this.handleNoteSave} />
+    </div>
+  );
+}
+
 }
 
 export default Todo;

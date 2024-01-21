@@ -1,7 +1,6 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const cors = require('cors'); // Import the cors middleware
+const cors = require('cors');
 const multer = require('multer');
 const path = require('path');
 const routes = require('./routes/api.js');
