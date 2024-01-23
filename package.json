@@ -3,14 +3,15 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-    "scripts": {
-      "start": "node server/index.js",
-      "start-watch": "nodemon server/index.js",
-      "dev": "concurrently \"npm run start-watch\" \"cd client && npm run dev\""
-    },
+  "scripts": {
+    "start": "node server/index.js",
+    "start-watch": "nodemon server/index.js",
+    "dev": "concurrently \"npm run start-watch\" \"cd client && npm run dev\""
+  },
   "license": "ISC",
   "dependencies": {
-    "dotenv": "^16.3.1"
+    "dotenv": "^16.3.1",
+    "node-schedule": "^2.1.1"
   },
   "devDependencies": {
     "concurrently": "^8.2.2",

@@ -5,6 +5,7 @@ const multer = require('multer');
 const path = require('path');
 const routes = require('./routes/api.js');
 const noteRoutes = require('./routes/noteRoutes.js');
+const imagesRoutes = require('./routes/images.js');
 require('dotenv').config();
 
 const app = express();
@@ -16,9 +17,10 @@ mongoose
   .then(() => console.log('Database connected successfully'))
   .catch((err) => console.log(err));
 
-// Serve uploaded files statically
-app.use('/uploads', express.static('uploads'));
+// Set up CORS middleware
+app.use(cors());
 
+// Serve uploaded files statically with full path
 // Middleware to handle image uploads
 const storage = multer.diskStorage({
   destination: 'uploads/',
@@ -38,8 +40,8 @@ app.post('/api/upload', upload.single('file'), (req, res) => {
   res.json({ imageUrl });
 });
 
-// Enable CORS for all routes
-app.use(cors());
+// Set up middleware for serving static files
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Set up middleware for handling JSON and URL-encoded data
 app.use(express.json());
@@ -47,7 +49,8 @@ app.use(express.urlencoded({ extended: true }));
 
 // Use your routes
 app.use('/api', routes);
-app.use('/api', noteRoutes);
+app.use('/api/notes', noteRoutes);
+app.use('/api/images', imagesRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {

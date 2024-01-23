@@ -9,14 +9,9 @@ const Note = ({ onNoteSave }) => {
     setImageUrls([...imageUrls, url]);
   };
 
-  const handleSave = () => {
-    // Some logic to get noteText and imageUrls
-    onNoteSave({ noteText, imageUrls });
-  };
-
   const handleNoteSave = () => {
     // Call the parent component's function to save the note
-    onNoteSave({ noteText, imageUrls });
+    onNoteSave({ text: noteText, images: imageUrls });
     // Clear the input fields after saving
     setNoteText('');
     setImageUrls([]);
@@ -24,12 +19,24 @@ const Note = ({ onNoteSave }) => {
 
   return (
     <div>
-      {/* <textarea value={noteText} onChange={(e) => setNoteText(e.target.value)} />
-      <button onClick={handleSave}>Save Note</button> */}
       <ImageUploader onUpload={handleImageUpload} />
-      {/* <button onClick={handleNoteSave}>Save Note</button> */}
+      {/* Display uploaded images */}
+      {imageUrls.length > 0 && (
+        <div>
+          <p>Uploaded Images:</p>
+          {imageUrls.map((imageUrl, index) => (
+            <img key={index} src={imageUrl} alt={`Image ${index}`} style={imageStyle} />
+          ))}
+        </div>
+      )}
     </div>
   );
+};
+
+const imageStyle = {
+  maxWidth: '100%',
+  maxHeight: '200px', // Adjust as needed
+  margin: '10px 0',
 };
 
 export default Note;

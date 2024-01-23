@@ -3,6 +3,7 @@ import axios from 'axios';
 import Input from './Input';
 import ListTodo from './ListTodo';
 import Note from './Note';
+import ImageRender from './ImageRender';
 
 class Todo extends Component {
   state = {
@@ -85,6 +86,7 @@ class Todo extends Component {
         <Input getTodos={this.getTodos} />
         <ListTodo todos={todos} deleteTodo={this.deleteTodo} editTodo={this.handleNoteSave} />
         <Note onNoteSave={this.handleNoteSave} />
+        <ImageRender/>
       </div>
     );
   }
