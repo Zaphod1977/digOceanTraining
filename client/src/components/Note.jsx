@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import ImageUploader from './ImageUplaoder.jsx';
+import ImageUpload from './ImageUploader.jsx'; // Make sure the import path matches your file structure
 
 const Note = ({ onNoteSave }) => {
   const [noteText, setNoteText] = useState('');
@@ -10,22 +10,19 @@ const Note = ({ onNoteSave }) => {
   };
 
   const handleNoteSave = () => {
-    // Call the parent component's function to save the note
     onNoteSave({ text: noteText, images: imageUrls });
-    // Clear the input fields after saving
     setNoteText('');
     setImageUrls([]);
   };
 
   return (
     <div>
-      <ImageUploader onUpload={handleImageUpload} />
-      {/* Display uploaded images */}
+      <ImageUpload onUpload={handleImageUpload} />
       {imageUrls.length > 0 && (
         <div>
           <p>Uploaded Images:</p>
           {imageUrls.map((imageUrl, index) => (
-            <img key={index} src={imageUrl} alt={`Image ${index}`} style={imageStyle} />
+            <img key={index} src={imageUrl} alt={`Uploaded`} style={imageStyle} />
           ))}
         </div>
       )}
@@ -35,7 +32,7 @@ const Note = ({ onNoteSave }) => {
 
 const imageStyle = {
   maxWidth: '100%',
-  maxHeight: '200px', // Adjust as needed
+  maxHeight: '200px',
   margin: '10px 0',
 };
 

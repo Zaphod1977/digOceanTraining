@@ -34,7 +34,7 @@ router.get('/todos', async (req, res) => {
 
     // Log the timestamp for each todo
     todosWithTimestamp.forEach((todo) => {
-      console.log('Todo Timestamp:', todo.timestamp);
+      // console.log('Todo Timestamp:', todo.timestamp);
     });
 
     // Respond with the fetched todos

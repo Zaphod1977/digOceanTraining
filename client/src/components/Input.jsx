@@ -35,7 +35,7 @@ class Input extends Component {
         })
         .catch((err) => console.log(err));
     } else {
-      console.log('text field required');
+      // console.log('text field required');
     }
   };
 
